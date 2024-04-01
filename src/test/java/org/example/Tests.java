@@ -5,9 +5,12 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -18,7 +21,7 @@ public class Tests {
     public void DLUserManual() throws InterruptedException {
 
         WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.manage().window().maximize();
 
         // 1. Зайти на сайт Яндекса (https://www.yandex.ru/);
@@ -37,6 +40,9 @@ public class Tests {
         // Запускаем поиск
         WebElement searchBtn = driver.findElement(By.xpath("//button[@class='arrow__button' and @type='submit']"));
         searchBtn.click();
+
+        // Ожидаем прогрузки страницы и появления попапа "Сделайте Яндекс основным поиском"
+        Thread.sleep(2000);
 
         // Создаём список вкладок и переходим на втроую вкладку с результатами поиска
         ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
@@ -63,7 +69,7 @@ public class Tests {
         WebElement products = driver.findElement(By.xpath("//a[contains(.,'Продукты')]"));
         products.click();
 
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         // Ищем продукт Ankey IDM и переходим по ссылке
         WebElement ankey = driver.findElement(By.xpath("//a[contains(.,'Ankey IDM')]"));
         ankey.click();
