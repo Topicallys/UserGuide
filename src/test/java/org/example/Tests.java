@@ -69,6 +69,7 @@ public class Tests {
         WebElement products = driver.findElement(By.xpath("//a[contains(.,'Продукты')]"));
         products.click();
 
+        // Ожидаем открытия списка продуктов
         Thread.sleep(1000);
         // Ищем продукт Ankey IDM и переходим по ссылке
         WebElement ankey = driver.findElement(By.xpath("//a[contains(.,'Ankey IDM')]"));
